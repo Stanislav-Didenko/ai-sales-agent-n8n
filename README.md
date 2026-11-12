@@ -94,7 +94,7 @@ MEDIUM: questions only about what is missing:
 ## Repository
 
 ```
-workflow/veloxa_sales_agent_demo.json   n8n workflow export (115 nodes, credentials and IDs removed)
+workflow/veloxa_sales_agent_demo.json   n8n workflow export (117 nodes, credentials and IDs removed)
 prompts/system_prompts.md              the two prompts: fact extraction (Haiku), draft and call brief (Sonnet)
 config/services.csv                    service catalog with minimum budget and weeks
 config/out_of_scope.csv                categories the agency does not do

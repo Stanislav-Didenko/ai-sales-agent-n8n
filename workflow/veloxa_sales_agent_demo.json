@@ -551,8 +551,8 @@
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
    "position": [
-    2576,
-    -384
+    2416,
+    -272
    ]
   },
   {
@@ -586,8 +586,8 @@
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.3,
    "position": [
-    2736,
-    48
+    2464,
+    192
    ],
    "retryOnFail": true,
    "maxTries": 2,
@@ -628,8 +628,8 @@
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
    "position": [
-    2976,
-    48
+    2704,
+    192
    ]
   },
   {
@@ -655,8 +655,8 @@
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.3,
    "position": [
-    3216,
-    -80
+    2944,
+    64
    ],
    "retryOnFail": true,
    "maxTries": 2,
@@ -687,8 +687,8 @@
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.3,
    "position": [
-    3216,
-    160
+    2944,
+    304
    ],
    "retryOnFail": true,
    "maxTries": 2,
@@ -719,8 +719,8 @@
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.3,
    "position": [
-    3456,
-    160
+    3184,
+    304
    ],
    "retryOnFail": true,
    "maxTries": 2,
@@ -743,8 +743,8 @@
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
-    3696,
-    48
+    3424,
+    192
    ]
   },
   {
@@ -809,8 +809,8 @@
    "type": "n8n-nodes-base.switch",
    "typeVersion": 3.2,
    "position": [
-    3888,
-    176
+    3616,
+    320
    ]
   },
   {
@@ -831,8 +831,8 @@
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.3,
    "position": [
-    4176,
-    -80
+    3904,
+    64
    ],
    "retryOnFail": true,
    "maxTries": 2,
@@ -863,8 +863,8 @@
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.3,
    "position": [
-    4176,
-    64
+    3904,
+    208
    ],
    "retryOnFail": true,
    "maxTries": 2,
@@ -887,8 +887,8 @@
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
-    4416,
-    48
+    4144,
+    192
    ]
   },
   {
@@ -918,8 +918,8 @@
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
    "position": [
-    4656,
-    48
+    4384,
+    192
    ]
   },
   {
@@ -940,8 +940,8 @@
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.3,
    "position": [
-    4896,
-    -32
+    4624,
+    112
    ],
    "retryOnFail": true,
    "maxTries": 2,
@@ -1013,8 +1013,8 @@
    "type": "n8n-nodes-base.switch",
    "typeVersion": 3.2,
    "position": [
-    5136,
-    48
+    4864,
+    192
    ]
   },
   {
@@ -1027,8 +1027,8 @@
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
-    6032,
-    -192
+    5664,
+    0
    ]
   },
   {
@@ -1062,8 +1062,8 @@
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.3,
    "position": [
-    6272,
-    -192
+    5904,
+    0
    ],
    "retryOnFail": true,
    "maxTries": 2,
@@ -1086,8 +1086,8 @@
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
-    6512,
-    -192
+    6144,
+    0
    ]
   },
   {
@@ -1118,8 +1118,8 @@
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
    "position": [
-    6752,
-    -192
+    6384,
+    0
    ]
   },
   {
@@ -1140,8 +1140,8 @@
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.3,
    "position": [
-    6992,
-    -304
+    6624,
+    -112
    ],
    "retryOnFail": true,
    "maxTries": 2,
@@ -1172,8 +1172,8 @@
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.3,
    "position": [
-    7232,
-    -304
+    6864,
+    -112
    ],
    "retryOnFail": true,
    "maxTries": 2,
@@ -1196,8 +1196,8 @@
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
-    7472,
-    -64
+    7088,
+    240
    ]
   },
   {
@@ -1331,8 +1331,8 @@
    "type": "n8n-nodes-base.switch",
    "typeVersion": 3.2,
    "position": [
-    7712,
-    -64
+    7328,
+    240
    ]
   },
   {
@@ -1403,8 +1403,8 @@
    "type": "n8n-nodes-base.telegram",
    "typeVersion": 1.2,
    "position": [
-    7952,
-    -432
+    7568,
+    -128
    ],
    "onError": "continueRegularOutput",
    "credentials": {
@@ -1470,8 +1470,8 @@
    "type": "n8n-nodes-base.telegram",
    "typeVersion": 1.2,
    "position": [
-    7952,
-    -240
+    7568,
+    64
    ],
    "onError": "continueRegularOutput",
    "credentials": {
@@ -1537,8 +1537,8 @@
    "type": "n8n-nodes-base.telegram",
    "typeVersion": 1.2,
    "position": [
-    7952,
-    -64
+    7568,
+    240
    ],
    "onError": "continueRegularOutput",
    "credentials": {
@@ -1616,8 +1616,8 @@
    "type": "n8n-nodes-base.telegram",
    "typeVersion": 1.2,
    "position": [
-    7952,
-    128
+    7568,
+    432
    ],
    "onError": "continueRegularOutput",
    "credentials": {
@@ -1642,8 +1642,8 @@
    "type": "n8n-nodes-base.telegram",
    "typeVersion": 1.2,
    "position": [
-    7952,
-    304
+    7568,
+    608
    ],
    "onError": "continueRegularOutput",
    "credentials": {
@@ -1663,8 +1663,8 @@
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
-    8192,
-    -64
+    7808,
+    240
    ]
   },
   {
@@ -1708,8 +1708,8 @@
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.7,
    "position": [
-    8432,
-    -64
+    8048,
+    240
    ],
    "onError": "continueRegularOutput",
    "credentials": {
@@ -1728,8 +1728,8 @@
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
-    8672,
-    -272
+    8288,
+    32
    ]
   },
   {
@@ -1761,8 +1761,8 @@
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.7,
    "position": [
-    8912,
-    -272
+    8528,
+    32
    ],
    "onError": "continueRegularOutput",
    "credentials": {
@@ -1781,8 +1781,8 @@
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
-    8672,
-    -64
+    8288,
+    240
    ]
   },
   {
@@ -1800,8 +1800,8 @@
    "type": "n8n-nodes-base.telegram",
    "typeVersion": 1.2,
    "position": [
-    8912,
-    -112
+    8528,
+    192
    ],
    "onError": "continueRegularOutput",
    "credentials": {
@@ -1840,8 +1840,8 @@
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.7,
    "position": [
-    8912,
-    64
+    8528,
+    368
    ],
    "onError": "continueRegularOutput",
    "credentials": {
@@ -1860,8 +1860,8 @@
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
-    8672,
-    208
+    8288,
+    512
    ]
   },
   {
@@ -1874,8 +1874,8 @@
    "type": "n8n-nodes-base.gmail",
    "typeVersion": 2.2,
    "position": [
-    8912,
-    208
+    8528,
+    512
    ],
    "onError": "continueRegularOutput",
    "credentials": {
@@ -1904,8 +1904,8 @@
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.7,
    "position": [
-    1216,
-    1536
+    240,
+    1152
    ],
    "executeOnce": true,
    "credentials": {
@@ -1934,8 +1934,8 @@
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.7,
    "position": [
-    1456,
-    1536
+    480,
+    1152
    ],
    "executeOnce": true,
    "alwaysOutputData": true,
@@ -1955,8 +1955,8 @@
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
-    1696,
-    1536
+    720,
+    1152
    ]
   },
   {
@@ -2090,8 +2090,8 @@
    "type": "n8n-nodes-base.switch",
    "typeVersion": 3.2,
    "position": [
-    1936,
-    1536
+    960,
+    1152
    ]
   },
   {
@@ -2110,8 +2110,8 @@
    "type": "n8n-nodes-base.gmail",
    "typeVersion": 2.2,
    "position": [
-    2176,
-    1296
+    1200,
+    912
    ],
    "onError": "continueRegularOutput",
    "credentials": {
@@ -2148,8 +2148,8 @@
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
    "position": [
-    2416,
-    1296
+    1440,
+    912
    ]
   },
   {
@@ -2170,8 +2170,8 @@
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.3,
    "position": [
-    2656,
-    1232
+    1680,
+    848
    ],
    "retryOnFail": true,
    "maxTries": 2,
@@ -2202,8 +2202,8 @@
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.3,
    "position": [
-    2896,
-    1232
+    1920,
+    848
    ],
    "retryOnFail": true,
    "maxTries": 2,
@@ -2231,8 +2231,8 @@
    "type": "n8n-nodes-base.gmail",
    "typeVersion": 2.2,
    "position": [
-    2176,
-    1440
+    1200,
+    1056
    ],
    "onError": "continueRegularOutput",
    "credentials": {
@@ -2261,8 +2261,8 @@
    "type": "n8n-nodes-base.telegram",
    "typeVersion": 1.2,
    "position": [
-    2176,
-    1584
+    1200,
+    1200
    ],
    "onError": "continueRegularOutput",
    "credentials": {
@@ -2290,8 +2290,8 @@
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.3,
    "position": [
-    2176,
-    1712
+    1200,
+    1328
    ],
    "retryOnFail": true,
    "maxTries": 2,
@@ -2313,8 +2313,8 @@
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
-    2176,
-    1856
+    1200,
+    1472
    ]
   },
   {
@@ -2335,8 +2335,8 @@
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.3,
    "position": [
-    2416,
-    1856
+    1440,
+    1472
    ],
    "retryOnFail": true,
    "maxTries": 2,
@@ -2363,23 +2363,23 @@
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.3,
    "position": [
-    2656,
-    1856
+    1680,
+    1472
    ],
    "disabled": true,
    "onError": "continueRegularOutput"
   },
   {
    "parameters": {
-    "jsCode": "function S(v) { return String(v == null ? '' : v).trim(); }\nfunction tryFirst(n) { try { const x = $(n).first(); return x ? x.json : null; } catch (e) { return null; } }\nfunction msgOf(e) { if (!e) return ''; if (typeof e === 'string') return e.slice(0, 300); return S(e.message || e.description || JSON.stringify(e)).slice(0, 300); }\nconst h = $('Handle update').first().json;\nconst errs = [];\nlet ok = true;\nfunction errOf(n) { const x = tryFirst(n); return x && x.error ? n + ': ' + msgOf(x.error) : null; }\nconst patchExtra = {};\nif (h.action === 'send') {\n  const g = tryFirst('Send email');\n  if (!g || !g.id) { ok = false; errs.push('Gmail send: ' + (g && g.error ? msgOf(g.error) : 'no message id returned')); }\n  else { patchExtra.gmail_thread_id = S(g.threadId); patchExtra.gmail_message_id = S(g.id); [errOf('PD: deal stage after send'), errOf('PD: email note')].forEach(function (e) { if (e) errs.push(e); }); }\n}\nif (h.action === 'nudge') { const g = tryFirst('Send nudge'); if (!g || !g.id) { ok = false; errs.push('Gmail reminder: ' + (g && g.error ? msgOf(g.error) : 'no message id returned')); } }\nif (h.action === 'edit_prompt') { const t = tryFirst('Ask for changes'); if (!t || !t.result) { ok = false; errs.push('Telegram prompt: ' + (t && t.error ? msgOf(t.error) : 'not sent')); } else patchExtra.edit_prompt_id = String(t.result.message_id); }\nif (h.action === 'crm') { const e = errOf('PD: update deal (manager)'); if (e) errs.push(e); }\nif (h.action === 'call') { const v = tryFirst('Build voice payload'); if (v) patchExtra.voice_payload = v.payload_json; const e = errOf('PD: voice payload note'); if (e) errs.push(e); }\nconst plan = ok ? (h.ok || {}) : (h.fail || {});\nconst patch = plan.patch ? Object.assign({}, plan.patch, patchExtra) : null;\nconst prior = h.lead ? S(h.lead.errors) : '';\nif (patch && errs.length) patch.errors = (prior ? prior + ' | ' : '') + errs.join(' | ');\nconst answer = plan.answer ? Object.assign({}, plan.answer) : null;\nif (answer && errs.length && ok) answer.text = (answer.text + ' (with warnings: ' + errs[0] + ')').slice(0, 190);\nconst out = Object.assign({}, patch || {}, {\n  _has_patch: !!(patch && patch.lead_id), _edit: plan.edit || null, _has_edit: !!plan.edit,\n  _answer: answer, _has_answer: !!answer, _redraft: !!(ok && h.redraft), _errs: errs, _chat_id: h.chat_id\n});\nreturn [{ json: out }];\n"
+    "jsCode": "function S(v) { return String(v == null ? '' : v).trim(); }\nfunction tryFirst(n) { try { const x = $(n).first(); return x ? x.json : null; } catch (e) { return null; } }\nfunction msgOf(e) { if (!e) return ''; if (typeof e === 'string') return e.slice(0, 300); return S(e.message || e.description || JSON.stringify(e)).slice(0, 300); }\nconst h = $('Handle update').first().json;\nconst errs = [];\nlet ok = true;\nfunction errOf(n) { const x = tryFirst(n); return x && x.error ? n + ': ' + msgOf(x.error) : null; }\nconst patchExtra = {};\nif (h.action === 'send') {\n  const g = tryFirst('Send reply (thread)') || tryFirst('Send email');\n  if (!g || !g.id) { ok = false; errs.push('Gmail send: ' + (g && g.error ? msgOf(g.error) : 'no message id returned')); }\n  else { patchExtra.gmail_thread_id = S(g.threadId); patchExtra.gmail_message_id = S(g.id); [errOf('PD: deal stage after send'), errOf('PD: email note')].forEach(function (e) { if (e) errs.push(e); }); }\n}\nif (h.action === 'nudge') { const g = tryFirst('Send nudge'); if (!g || !g.id) { ok = false; errs.push('Gmail reminder: ' + (g && g.error ? msgOf(g.error) : 'no message id returned')); } }\nif (h.action === 'edit_prompt') { const t = tryFirst('Ask for changes'); if (!t || !t.result) { ok = false; errs.push('Telegram prompt: ' + (t && t.error ? msgOf(t.error) : 'not sent')); } else patchExtra.edit_prompt_id = String(t.result.message_id); }\nif (h.action === 'crm') { const e = errOf('PD: update deal (manager)'); if (e) errs.push(e); }\nif (h.action === 'call') { const v = tryFirst('Build voice payload'); if (v) patchExtra.voice_payload = v.payload_json; const e = errOf('PD: voice payload note'); if (e) errs.push(e); }\nconst plan = ok ? (h.ok || {}) : (h.fail || {});\nconst patch = plan.patch ? Object.assign({}, plan.patch, patchExtra) : null;\nconst prior = h.lead ? S(h.lead.errors) : '';\nif (patch && errs.length) patch.errors = (prior ? prior + ' | ' : '') + errs.join(' | ');\nconst answer = plan.answer ? Object.assign({}, plan.answer) : null;\nif (answer && errs.length && ok) answer.text = (answer.text + ' (with warnings: ' + errs[0] + ')').slice(0, 190);\nconst out = Object.assign({}, patch || {}, {\n  _has_patch: !!(patch && patch.lead_id), _edit: plan.edit || null, _has_edit: !!plan.edit,\n  _answer: answer, _has_answer: !!answer, _redraft: !!(ok && h.redraft), _errs: errs, _chat_id: h.chat_id\n});\nreturn [{ json: out }];\n"
    },
    "id": "dd2cd92e-a929-4c90-8ebf-4e53b199cf6d",
    "name": "Finish action",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
-    3136,
-    1536
+    2160,
+    1152
    ]
   },
   {
@@ -2410,8 +2410,8 @@
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
    "position": [
-    3376,
-    1536
+    2400,
+    1152
    ]
   },
   {
@@ -2455,8 +2455,8 @@
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.7,
    "position": [
-    3616,
-    1456
+    2640,
+    1072
    ],
    "onError": "continueRegularOutput",
    "credentials": {
@@ -2494,8 +2494,8 @@
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
    "position": [
-    3856,
-    1536
+    2880,
+    1152
    ]
   },
   {
@@ -2514,8 +2514,8 @@
    "type": "n8n-nodes-base.telegram",
    "typeVersion": 1.2,
    "position": [
-    4096,
-    1456
+    3120,
+    1072
    ],
    "onError": "continueRegularOutput",
    "credentials": {
@@ -2553,8 +2553,8 @@
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
    "position": [
-    4336,
-    1536
+    3360,
+    1152
    ]
   },
   {
@@ -2571,8 +2571,8 @@
    "type": "n8n-nodes-base.telegram",
    "typeVersion": 1.2,
    "position": [
-    4576,
-    1456
+    3600,
+    1072
    ],
    "onError": "continueRegularOutput",
    "credentials": {
@@ -2610,8 +2610,8 @@
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
    "position": [
-    4816,
-    1536
+    3840,
+    1152
    ]
   },
   {
@@ -3371,8 +3371,8 @@
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
    "position": [
-    6000,
-    -400
+    5632,
+    -208
    ]
   },
   {
@@ -3387,8 +3387,8 @@
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
    "position": [
-    7440,
-    -512
+    7056,
+    -208
    ]
   },
   {
@@ -3482,8 +3482,8 @@
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
    "position": [
-    5216,
-    224
+    4944,
+    368
    ]
   },
   {
@@ -3504,8 +3504,8 @@
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.3,
    "position": [
-    5376,
-    128
+    5104,
+    272
    ],
    "retryOnFail": true,
    "maxTries": 2,
@@ -3546,8 +3546,8 @@
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
    "position": [
-    2288,
-    -128
+    2160,
+    -96
    ]
   },
   {
@@ -3560,8 +3560,8 @@
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
-    2512,
-    -640
+    2272,
+    -448
    ]
   },
   {
@@ -3593,14 +3593,72 @@
    "type": "n8n-nodes-base.googleSheets",
    "typeVersion": 4.7,
    "position": [
-    2752,
-    -640
+    2512,
+    -448
    ],
    "onError": "continueRegularOutput",
    "credentials": {
     "googleSheetsOAuth2Api": {
      "id": "YOUR_CREDENTIAL_ID",
      "name": "YOUR_GOOGLESHEETSOAUTH2API"
+    }
+   }
+  },
+  {
+   "id": "69193043-9590-463b-9b79-1707bd9edeb3",
+   "name": "In thread?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    2050,
+    1200
+   ],
+   "parameters": {
+    "conditions": {
+     "combinator": "and",
+     "conditions": [
+      {
+       "leftValue": "={{ $json.lead.gmail_message_id }}",
+       "operator": {
+        "operation": "notEmpty",
+        "singleValue": true,
+        "type": "string"
+       }
+      }
+     ],
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose"
+     }
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "f96e3b93-c578-43ba-992e-1d522db7e849",
+   "name": "Send reply (thread)",
+   "type": "n8n-nodes-base.gmail",
+   "typeVersion": 2.2,
+   "position": [
+    2176,
+    1160
+   ],
+   "parameters": {
+    "emailType": "text",
+    "message": "={{ $json.email.body }}",
+    "messageId": "={{ $json.lead.gmail_message_id }}",
+    "operation": "reply",
+    "options": {
+     "appendAttribution": false,
+     "senderName": "={{ $json.email.sender }}"
+    }
+   },
+   "onError": "continueRegularOutput",
+   "credentials": {
+    "gmailOAuth2": {
+     "id": "YOUR_CREDENTIAL_ID",
+     "name": "YOUR_GMAILOAUTH2"
     }
    }
   }
@@ -4299,7 +4357,7 @@
    "main": [
     [
      {
-      "node": "Send email",
+      "node": "In thread?",
       "type": "main",
       "index": 0
      }
@@ -4852,6 +4910,35 @@
      }
     ]
    ]
+  },
+  "In thread?": {
+   "main": [
+    [
+     {
+      "node": "Send reply (thread)",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Send email",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Send reply (thread)": {
+   "main": [
+    [
+     {
+      "node": "Email sent?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
   }
  },
  "settings": {
@@ -4868,34 +4955,6 @@
     "Read out-of-scope (reply)",
     "Read leads (reply)",
     "Reply intake"
-   ]
-  },
-  {
-   "id": "592e2f18-df8e-40f7-80c6-fba0b16303cd",
-   "name": "6. Manager actions",
-   "nodeNames": [
-    "Read settings (TG)",
-    "Read leads (TG)",
-    "Handle update",
-    "Action",
-    "Send email",
-    "Email sent?",
-    "PD: deal stage after send",
-    "PD: email note",
-    "Send nudge",
-    "Ask for changes",
-    "PD: update deal (manager)",
-    "Build voice payload",
-    "PD: voice payload note",
-    "Voice provider (not connected)",
-    "Finish action",
-    "Save patch?",
-    "Update lead (TG)",
-    "Edit card?",
-    "TG: update card",
-    "Answer button?",
-    "TG: answer button",
-    "Redraft?"
    ]
   },
   {
@@ -4957,6 +5016,36 @@
     "Contact update?",
     "PD: update person",
     "Route by tier"
+   ]
+  },
+  {
+   "id": "c0a0ea39-91df-4fe3-a03e-f2c594f8d664",
+   "name": "6. Manager actions",
+   "nodeNames": [
+    "Read settings (TG)",
+    "Read leads (TG)",
+    "Handle update",
+    "Action",
+    "In thread?",
+    "Send reply (thread)",
+    "Send email",
+    "Email sent?",
+    "PD: deal stage after send",
+    "PD: email note",
+    "Send nudge",
+    "Ask for changes",
+    "PD: update deal (manager)",
+    "Build voice payload",
+    "PD: voice payload note",
+    "Voice provider (not connected)",
+    "Finish action",
+    "Save patch?",
+    "Update lead (TG)",
+    "Edit card?",
+    "TG: update card",
+    "Answer button?",
+    "TG: answer button",
+    "Redraft?"
    ]
   }
  ]
