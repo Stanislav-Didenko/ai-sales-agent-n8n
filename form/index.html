@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veloxa AI — Tell us what to automate</title>
+<meta name="description" content="Veloxa AI builds AI automations for small teams: lead handling, CRM sync, inbox triage and assistants.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Teal Lab */
+    --ink: #0B2A2E;        /* deep teal-black: text, left panel */
+    --ink-2: #123C41;
+    --teal: #0E7C74;       /* primary */
+    --teal-hover: #0B655F;
+    --aqua: #2DD4BF;       /* accent on dark */
+    --mint: #E3F7F3;       /* soft fills */
+    --paper: #F5F8F7;      /* page */
+    --card: #FFFFFF;
+    --line: #D8E3E1;
+    --muted: #5B7276;
+    --error: #C2410C;
+    --radius: 14px;
+    --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { font-family: var(--font); color: var(--ink); background: var(--paper); -webkit-font-smoothing: antialiased; line-height: 1.5; }
+
+  .page { min-height: 100vh; display: grid; grid-template-columns: minmax(320px, 5fr) 7fr; }
+
+  /* Left panel */
+  .side { background: #E9F4F1; color: var(--ink); border-right: 1px solid var(--line); padding: 48px 56px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+  .side::after { content: ""; position: absolute; right: -180px; bottom: -180px; width: 460px; height: 460px; border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(14,124,116,.12), rgba(14,124,116,0) 65%); pointer-events: none; }
+  .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 20px; letter-spacing: -.01em; color: var(--ink); }
+  .mark { width: 34px; height: 34px; border-radius: 10px; background: var(--teal); display: grid; place-items: center; }
+  .mark svg { width: 20px; height: 20px; }
+  .side h1 { font-size: 38px; line-height: 1.15; letter-spacing: -.025em; margin: 64px 0 16px; color: var(--ink); font-weight: 700; max-width: 440px; }
+  .side h1 span { color: var(--teal); }
+  .lede { color: var(--muted); font-size: 16px; max-width: 420px; margin: 0; }
+  .steps { list-style: none; padding: 0; margin: 40px 0 0; display: grid; gap: 18px; max-width: 420px; }
+  .steps li { display: grid; grid-template-columns: 32px 1fr; gap: 14px; align-items: start; }
+  .num { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(14,124,116,.45); background: #fff; color: var(--teal); display: grid; place-items: center; font-size: 13px; font-weight: 600; }
+  .steps b { display: block; color: var(--ink); font-weight: 600; font-size: 15px; }
+  .steps span { color: var(--muted); font-size: 14px; }
+  .services { margin-top: auto; padding-top: 40px; display: flex; flex-wrap: wrap; gap: 8px; max-width: 440px; }
+  .chip { font-size: 12.5px; padding: 6px 11px; border-radius: 999px; background: #fff; color: var(--ink-2); border: 1px solid var(--line); }
+
+  /* Form side */
+  .main { padding: 48px 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .card { width: 100%; max-width: 640px; background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 36px 40px; box-shadow: 0 1px 2px rgba(11,42,46,.04), 0 12px 32px -12px rgba(11,42,46,.12); }
+  .card h2 { margin: 0 0 6px; font-size: 24px; letter-spacing: -.015em; }
+  .card .sub { margin: 0 0 28px; color: var(--muted); font-size: 15px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px; }
+  .full { grid-column: 1 / -1; }
+  .field label { display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; font-weight: 600; margin-bottom: 7px; }
+  .opt { font-weight: 400; color: var(--muted); font-size: 12.5px; }
+  .req { color: var(--teal); }
+  .field label .req { margin: 0 auto 0 4px; }
+  input[type=text], input[type=email], input[type=tel], input[type=url], textarea {
+    width: 100%; font: inherit; font-size: 15px; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 13px;
+    transition: border-color .15s, box-shadow .15s; }
+  textarea { min-height: 132px; resize: vertical; line-height: 1.5; }
+  input::placeholder, textarea::placeholder { color: #93A7AA; }
+  input:focus, textarea:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(14,124,116,.15); }
+  .field.invalid input, .field.invalid textarea { border-color: var(--error); }
+  .err { display: none; color: var(--error); font-size: 12.5px; margin-top: 6px; }
+  .field.invalid .err { display: block; }
+  .hint { font-size: 12.5px; color: var(--muted); margin-top: 6px; display: flex; justify-content: space-between; gap: 12px; }
+  .count { white-space: nowrap; }
+  .field label.call { justify-content: flex-start; font-weight: 400; }
+  .count.over { color: var(--error); }
+
+  .call { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 10px; background: var(--mint); font-size: 14px; }
+  .call input { width: 18px; height: 18px; margin: 1px 0 0; accent-color: var(--teal); flex: none; }
+  .call.disabled { opacity: .55; }
+  .call small { display: block; color: var(--muted); font-size: 12.5px; margin-top: 2px; }
+
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .actions { margin-top: 26px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  button { font: inherit; font-weight: 600; font-size: 15px; color: #fff; background: var(--teal); border: 0; border-radius: 10px; padding: 13px 22px; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; transition: background .15s; }
+  button:hover { background: var(--teal-hover); }
+  button:focus-visible { outline: 3px solid rgba(14,124,116,.35); outline-offset: 2px; }
+  button[disabled] { opacity: .7; cursor: progress; }
+  .spinner { width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(255,255,255,.4); border-top-color: #fff; animation: spin .8s linear infinite; display: none; }
+  button[disabled] .spinner { display: inline-block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .privacy { font-size: 12.5px; color: var(--muted); max-width: 360px; margin: 0; }
+  .alert { display: none; margin-top: 18px; padding: 12px 14px; border-radius: 10px; background: #FFF4ED; color: var(--error); font-size: 14px; border: 1px solid #FBD5BE; }
+  .alert.show { display: block; }
+
+  .done { display: none; text-align: left; }
+  .done .ok { width: 52px; height: 52px; border-radius: 50%; background: var(--mint); display: grid; place-items: center; margin-bottom: 18px; }
+  .done h2 { margin-bottom: 8px; }
+  .done p { color: var(--muted); margin: 0 0 8px; }
+  .card.sent form { display: none; }
+  .card.sent .done { display: block; }
+
+  .foot { margin-top: 18px; text-align: center; font-size: 12px; color: var(--muted); }
+
+  @media (max-width: 960px) {
+    .page { grid-template-columns: 1fr; }
+    .side { padding: 32px 24px 36px; }
+    .side h1 { font-size: 30px; margin-top: 36px; }
+    .services { margin-top: 28px; padding-top: 0; }
+    .main { padding: 24px 16px 40px; }
+    .card { padding: 26px 20px; }
+  }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <aside class="side">
+    <div class="brand">
+      <div class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5l8 14 8-14"/><path d="M9 5h6" opacity=".55"/></svg>
+      </div>
+      Veloxa AI
+    </div>
+    <h1>Automations that take the <span>busywork</span> off your team.</h1>
+    <p class="lede">Tell us which process eats your team's hours. We'll come back with questions or a time for a short call.</p>
+    <ol class="steps">
+      <li><div class="num">1</div><div><b>You describe the task</b><span>A few sentences are enough. Budget and deadline help, but they're optional.</span></div></li>
+      <li><div class="num">2</div><div><b>A person reads it</b><span>AI helps us sort incoming requests. Every reply is reviewed and sent by a human.</span></div></li>
+      <li><div class="num">3</div><div><b>You get a reply by email</b><span>Either a few clarifying questions or a proposal for a short intro call.</span></div></li>
+    </ol>
+    <div class="services" aria-label="What we build">
+      <span class="chip">Lead handling</span><span class="chip">CRM integrations</span><span class="chip">AI inbox triage</span>
+      <span class="chip">AI assistants</span><span class="chip">Document processing</span><span class="chip">Reporting</span><span class="chip">Custom agents</span>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="card" id="card">
+      <form id="lead-form" novalidate>
+        <h2>Tell us what to automate</h2>
+        <p class="sub">Fields marked <span class="req">*</span> are required.</p>
+
+        <div class="grid">
+          <div class="field">
+            <label for="name">Your name <span class="opt">optional</span></label>
+            <input id="name" name="name" type="text" autocomplete="name" maxlength="120" placeholder="Jane Doe">
+          </div>
+          <div class="field" data-required>
+            <label for="email">Work email <span class="req">*</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" maxlength="200" placeholder="jane@company.com" required>
+            <div class="err">Please enter a valid email address.</div>
+          </div>
+          <div class="field" data-required>
+            <label for="company">Company <span class="req">*</span></label>
+            <input id="company" name="company" type="text" autocomplete="organization" maxlength="200" placeholder="Acme Logistics" required>
+            <div class="err">Please enter your company name.</div>
+          </div>
+          <div class="field">
+            <label for="website">Website <span class="opt">optional</span></label>
+            <input id="website" name="website" type="text" inputmode="url" autocomplete="url" maxlength="300" placeholder="acme.com">
+          </div>
+
+          <div class="field full" data-required>
+            <label for="request">What do you want to automate? <span class="req">*</span></label>
+            <textarea id="request" name="request" maxlength="3000" required placeholder="Example: Leads from our website go into a shared inbox and someone copies them into HubSpot by hand. We'd like that to happen automatically, with the urgent ones flagged."></textarea>
+            <div class="hint"><span>Which process, which tools you use today, what should change.</span><span class="count" id="count">0 / 3000</span></div>
+            <div class="err">Please describe the task in a sentence or two.</div>
+          </div>
+
+          <div class="field">
+            <label for="budget">Budget <span class="opt">optional</span></label>
+            <input id="budget" name="budget" type="text" maxlength="200" placeholder="e.g. $3–5k, or not sure yet">
+          </div>
+          <div class="field">
+            <label for="deadline">Deadline <span class="opt">optional</span></label>
+            <input id="deadline" name="deadline" type="text" maxlength="200" placeholder="e.g. live by end of March">
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone <span class="opt">optional</span></label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="40" placeholder="+1 555 010 2030">
+          </div>
+          <div class="field" style="display:flex;align-items:flex-end">
+            <label class="call disabled" id="call-wrap" for="call_consent" style="margin:0;width:100%;font-weight:400">
+              <input id="call_consent" name="call_consent" type="checkbox" disabled>
+              <span>OK to call me about this request<small>Add a phone number to enable</small></span>
+            </label>
+          </div>
+
+          <!-- spam trap: real people never see or fill this -->
+          <div class="hp" aria-hidden="true">
+            <label for="hp_field">Leave this empty</label>
+            <input id="hp_field" name="hp_field" type="text" tabindex="-1" autocomplete="off">
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="submit" id="submit"><span class="spinner" aria-hidden="true"></span><span id="submit-label">Send request</span></button>
+          <p class="privacy">We use your details only to reply to this request. AI helps us sort incoming requests; a person reviews every reply.</p>
+        </div>
+        <div class="alert" id="alert" role="alert"></div>
+      </form>
+
+      <div class="done" id="done" aria-live="polite">
+        <div class="ok" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0E7C74" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <h2>Thanks, we've got it</h2>
+        <p>A person on our team will read your request and reply by email to <b id="done-email"></b>.</p>
+        <p>If you don't see our email, check the spam folder for a message with "Veloxa AI" in the subject.</p>
+      </div>
+    </div>
+    <p class="foot">Portfolio demo · Veloxa AI is a fictional agency</p>
+  </main>
+</div>
+
+<script>
+  // Production webhook of the n8n workflow (works while the workflow is active).
+  const WEBHOOK_URL = 'https://YOUR_N8N_HOST/webhook/veloxa-lead';
+
+  const form = document.getElementById('lead-form');
+  const card = document.getElementById('card');
+  const btn = document.getElementById('submit');
+  const label = document.getElementById('submit-label');
+  const alertBox = document.getElementById('alert');
+  const req = document.getElementById('request');
+  const count = document.getElementById('count');
+  const phone = document.getElementById('phone');
+  const consent = document.getElementById('call_consent');
+  const callWrap = document.getElementById('call-wrap');
+
+  req.addEventListener('input', function () {
+    count.textContent = req.value.length + ' / 3000';
+    count.classList.toggle('over', req.value.length >= 3000);
+  });
+  phone.addEventListener('input', function () {
+    const has = phone.value.replace(/\D/g, '').length >= 6;
+    consent.disabled = !has;
+    if (!has) consent.checked = false;
+    callWrap.classList.toggle('disabled', !has);
+    callWrap.querySelector('small').textContent = has ? 'We may call to discuss your request' : 'Add a phone number to enable';
+  });
+
+  function check(field) {
+    const input = field.querySelector('input, textarea');
+    const v = input.value.trim();
+    let ok = v.length > 0;
+    if (ok && input.type === 'email') ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+    if (ok && input.id === 'request') ok = v.length >= 15;
+    field.classList.toggle('invalid', !ok);
+    return ok;
+  }
+  form.querySelectorAll('[data-required] input, [data-required] textarea').forEach(function (el) {
+    el.addEventListener('blur', function () { if (el.value.trim()) check(el.closest('.field')); });
+    el.addEventListener('input', function () { const f = el.closest('.field'); if (f.classList.contains('invalid')) check(f); });
+  });
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    alertBox.classList.remove('show');
+    const fields = Array.from(form.querySelectorAll('[data-required]'));
+    const bad = fields.filter(function (f) { return !check(f); });
+    if (bad.length) { bad[0].querySelector('input, textarea').focus(); return; }
+
+    const data = {};
+    ['name', 'email', 'company', 'website', 'request', 'budget', 'deadline', 'phone', 'hp_field'].forEach(function (k) {
+      data[k] = (form.elements[k].value || '').trim();
+    });
+    data.call_consent = consent.checked ? 'yes' : 'no';
+    data.page = location.href;
+
+    btn.disabled = true; label.textContent = 'Sending…';
+    try {
+      const res = await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      let body = {};
+      try { body = await res.json(); } catch (_) {}
+      if (!res.ok || body.ok === false) throw new Error(body.error || 'The server could not accept the request.');
+      document.getElementById('done-email').textContent = data.email;
+      card.classList.add('sent');
+    } catch (err) {
+      alertBox.textContent = (err && err.message && err.message !== 'Failed to fetch')
+        ? err.message
+        : 'Could not send right now. Please try again in a minute.';
+      alertBox.classList.add('show');
+    } finally {
+      btn.disabled = false; label.textContent = 'Send request';
+    }
+  });
+</script>
+</body>
+</html>

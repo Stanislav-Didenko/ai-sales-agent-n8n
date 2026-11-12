@@ -1,0 +1,41 @@
+key,value,note
+agency_name,Veloxa AI,Shown in emails and cards
+sender_name,Alex from Veloxa AI,Signature line added by code under every email
+telegram_chat_id,YOUR_TELEGRAM_CHAT_ID,Manager chat. Buttons are accepted only from this chat
+timezone,Europe/Zagreb,Used for dates in cards and the digest
+model_extract,claude-haiku-5-5,Fact extraction
+model_draft,claude-sonnet-5-5,Email drafts and call brief
+price_extract_in_per_mtok,0.10,"USD per 1M input tokens, extraction model"
+price_extract_out_per_mtok,0.50,"USD per 1M output tokens, extraction model"
+price_draft_in_per_mtok,2.00,"USD per 1M input tokens, draft model"
+price_draft_out_per_mtok,10.00,"USD per 1M output tokens, draft model"
+usd_rates,"USD:1,EUR:1.08,GBP:1.27,CHF:1.12,PLN:0.25,CAD:0.73,AUD:0.66",Budget conversion to USD. Unknown currency -> budget treated as missing
+free_email_domains,"gmail.com,googlemail.com,outlook.com,hotmail.com,live.com,yahoo.com,icloud.com,me.com,aol.com,proton.me,protonmail.com,gmx.com,gmx.de,mail.com,yandex.com,ukr.net",No website is derived from these domains
+injection_patterns,"ignore (all |any )?(the )?(previous|prior|above|earlier) (instructions|prompts?|rules)|system prompt|disregard (the )?(instructions|rules|above)|note to (the )?(ai|assistant|model|agent|bot)|you are (now )?(an? )?(ai|assistant|language model|agent)|(mark|rate|score|classify|route)[^.]{0,40}(as )?(high|hot|priority|top)|do not (flag|mention|reveal)|reveal (your|the) (prompt|instructions)|</?(system|instructions?)>","Regex, case-insensitive. A hit sends the lead to Attention without AI"
+max_request_chars,3000,Longer requests are cut
+dedupe_hours,24,Same email + same request text inside this window = duplicate
+max_clarify_rounds,1,"After this many question rounds, still-missing data goes to Attention"
+clarify_timeout_business_days,3,Medium lead silent this long -> timeout card with Nudge / Close
+nudge_template,Just following up on my questions above. A short reply is enough and helps us suggest the right next step.,Reminder text for Nudge. No AI involved
+prompt_version,2026-03-01 00:00:00,Written into every lead row
+pd_company_domain,YOUR_PIPEDRIVE_SUBDOMAIN,"Your Pipedrive subdomain (xxx in xxx.pipedrive.com), for deal links in cards"
+pd_pipeline_name,Inbound leads,Created by Setup Pipedrive
+pd_pipeline_id,(written by Setup Pipedrive),Set by Setup Pipedrive
+pd_stage_contacted,(written by Setup Pipedrive),"Stage ""Contacted"" (set by Setup Pipedrive)"
+pd_stage_waiting_for_info,(written by Setup Pipedrive),"Stage ""Waiting for info"" (set by Setup Pipedrive)"
+pd_stage_low_fit,(written by Setup Pipedrive),"Stage ""Low fit"" (set by Setup Pipedrive)"
+pd_stage_call_scheduled,(written by Setup Pipedrive),"Stage ""Call scheduled"" (set by Setup Pipedrive)"
+pd_stage_new,(written by Setup Pipedrive),"Stage ""New"" (set by Setup Pipedrive)"
+pd_stage_proposal,(written by Setup Pipedrive),"Stage ""Proposal"" (set by Setup Pipedrive)"
+pd_stage_negotiation,(written by Setup Pipedrive),"Stage ""Negotiation"" (set by Setup Pipedrive)"
+pd_stage_qualified,(written by Setup Pipedrive),"Stage ""Qualified"" (set by Setup Pipedrive)"
+pd_field_ai_tier,(written by Setup Pipedrive),"Deal field ""AI tier"" (set by Setup Pipedrive)"
+pd_field_ai_reason,(written by Setup Pipedrive),"Deal field ""AI reason"" (set by Setup Pipedrive)"
+pd_field_service,(written by Setup Pipedrive),"Deal field ""Service"" (set by Setup Pipedrive)"
+pd_field_website,(written by Setup Pipedrive),"Deal field ""Website"" (set by Setup Pipedrive)"
+pd_field_lead_id,(written by Setup Pipedrive),"Deal field ""Lead ID"" (set by Setup Pipedrive)"
+pd_field_budget_as_written,(written by Setup Pipedrive),"Deal field ""Budget (as written)"" (set by Setup Pipedrive)"
+pd_field_call_consent,(written by Setup Pipedrive),"Deal field ""Call consent"" (set by Setup Pipedrive)"
+pd_field_ai_confidence,(written by Setup Pipedrive),"Deal field ""AI confidence"" (set by Setup Pipedrive)"
+pd_field_missing_info,(written by Setup Pipedrive),"Deal field ""Missing info"" (set by Setup Pipedrive)"
+pd_field_deadline_as_written,(written by Setup Pipedrive),"Deal field ""Deadline (as written)"" (set by Setup Pipedrive)"

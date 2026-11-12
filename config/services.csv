@@ -1,0 +1,8 @@
+service_id,name,examples,min_budget_usd,min_weeks,active
+lead_automation,Inbound lead automation,"inquiries and requests from potential customers (quote, booking, shipment or service requests) arriving by web form or email: capture into CRM, routing to the right person, notifications, follow-ups",1500,2,Y
+crm_integration,CRM setup and integration,"HubSpot or Pipedrive setup, two-way sync with other tools, data migration",2000,3,Y
+ai_inbox,AI email and ticket triage,"sorting incoming emails or tickets, drafted replies, routing to the right person",2500,3,Y
+ai_assistant,AI assistant on company knowledge,"chatbot on website, Telegram or WhatsApp answering from company documents (RAG)",3000,4,Y
+doc_processing,Document processing,"documents of completed transactions (placed online orders, invoices, receipts, contracts, filled forms) read automatically and pushed into a POS, ERP, accounting or other system",2500,3,Y
+reporting,Automated reporting,scheduled reports and summaries pulled from several tools,1200,2,Y
+custom_agent,Custom multi-step AI agent,multi-step agent or several agents working across systems,5000,6,Y
