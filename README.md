@@ -69,7 +69,7 @@ Prices used: Haiku $0.10 / $0.50 and Sonnet $2 / $10 per million input / output 
 
 ![MEDIUM card](docs/screenshots/03-telegram-medium-card.jpg)
 
-The same lead after answering by email: re-scored to HIGH, a call invitation in the same thread and a call brief for the manager. Both emails were sent by the manager with one button:
+The same lead after answering by email: re-scored to HIGH, a call invitation and a call brief for the manager. Both emails were sent by the manager with one button:
 
 ![HIGH card](docs/screenshots/01-telegram-high-card.jpg)
 
