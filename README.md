@@ -11,7 +11,7 @@ A lead-qualification agent for a small AI-automation agency. It reads every requ
 ## What it does
 
 1. **Intake** (code): web form → required fields, honeypot, duplicate check (same email + same text in 24 h), regex filter for instruction-like text. Blocked requests cost nothing.
-2. **Fact extraction** (Claude Haiku, ~$0.0003): the model fills a JSON form: which service from the catalog, budget, deadline, signs of a real business, spam, injection. **Every fact comes with a verbatim quote.** Budget and deadline formats are handled by explicit rules (`6k`, `3k euro`, `€3.000`, `around 3 grand`, `two months`, `end of Q1`, `by Christmas`…).
+2. **Fact extraction** (Claude Haiku, ≈ $0.0003): the model fills a JSON form: which service from the catalog, budget, deadline, signs of a real business, spam, injection. **Every fact comes with a verbatim quote.** Budget and deadline formats are handled by explicit rules (`6k`, `3k euro`, `€3.000`, `around 3 grand`, `two months`, `end of Q1`, `by Christmas`…).
 3. **Verification and scoring** (code): every quote is checked against the original text; a quote that is not found cancels the fact. Code converts currencies, turns dates into weeks and compares budget and deadline with the service's thresholds from the *services* sheet. Result: **HIGH** (fits), **MEDIUM** (budget or deadline missing), **ATTENTION** (below threshold, unclear, suspicious) or **LOW** (not our profile).
 4. **CRM** (Pipedrive): person, organization and deal; the deal lands on the stage that matches the tier, with a note explaining the decision. Returning leads update their open deal instead of creating a new one.
 5. **Draft** (Claude Sonnet): HIGH → a reply proposing a short intro call + a call brief for the manager (goal, known facts, 3–5 qualifying questions, likely objections, close). MEDIUM → 2–3 questions only about what is missing. No prices, dates, promises or links; code scans the draft and flags anything suspicious on the card.
@@ -26,7 +26,7 @@ A lead-qualification agent for a small AI-automation agency. It reads every requ
 - **Facts with quotes.** Every extracted fact must be quoted word for word; code verifies the quote. This catches invented budgets and dates.
 - **Workflow, not an AI-agent node.** The steps are known in advance (extract → score → CRM → draft → human), so the model is called through a plain HTTP request: deterministic, cheap, every token accounted for.
 - **Business rules live in a sheet.** Services, minimum budgets and deadlines, out-of-scope categories, models, prices and texts are edited in Google Sheets without touching the workflow. The service catalog separates *leads* (a potential customer still has to be won: quote, booking or shipment requests) from *documents* (orders, invoices, contracts of a transaction that already happened).
-- **Two models.** Haiku reads every request (~$0.0003); Sonnet writes only for leads worth an email (~$0.005–0.01).
+- **Two models.** Haiku reads every request (≈ $0.0003); Sonnet writes only for leads worth an email (≈ $0.005–0.01).
 - **The CRM is the manager's workspace.** The sheet is the agent's memory and log, not a screen for people.
 
 ## Test results
