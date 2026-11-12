@@ -65,17 +65,17 @@ Prices used: Haiku $0.10 / $0.50 and Sonnet $2 / $10 per million input / output 
 
 ## Screenshots
 
-**Manager's card in Telegram** after the lead answered our questions: tier, reason, name and phone picked up from the reply, the follow-up and the call brief:
+**Manager's cards in Telegram.** One lead, two steps. First MEDIUM: budget and deadline are missing, so the agent asks only about them:
+
+![MEDIUM card](docs/screenshots/03-telegram-medium-card.jpg)
+
+The same lead after answering by email: re-scored to HIGH, a call invitation in the same thread and a call brief for the manager. Both emails were sent by the manager with one button:
 
 ![HIGH card](docs/screenshots/01-telegram-high-card.jpg)
 
-ATTENTION: budget below the service minimum or deadline too short, no draft, the manager decides:
+ATTENTION: budget below the service minimum or deadline too short, no draft, the manager decides (here: moved to Low, marked as not a lead):
 
 ![ATTENTION card](docs/screenshots/02-telegram-attention-card.jpg)
-
-MEDIUM: questions only about what is missing:
-
-![MEDIUM card](docs/screenshots/03-telegram-medium-card.jpg)
 
 **Pipedrive**: every lead on the stage that matches its tier, with the agent's note:
 
