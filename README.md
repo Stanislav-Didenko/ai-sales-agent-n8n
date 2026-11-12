@@ -73,6 +73,10 @@ The same lead after answering by email: re-scored to HIGH, a call invitation and
 
 ![HIGH card](docs/screenshots/01-telegram-high-card.jpg)
 
+**Email thread** (live run, 12.11): the agent's questions, the lead's answer and the call invitation, all in one Gmail thread. Name and phone came from the reply; the invitation uses them:
+
+![Email thread](docs/screenshots/04-email-thread.jpg)
+
 ATTENTION: budget below the service minimum or deadline too short, no draft, the manager decides (here: moved to Low, marked as not a lead):
 
 ![ATTENTION card](docs/screenshots/02-telegram-attention-card.jpg)
@@ -107,7 +111,7 @@ form/index.html                        the web form (single file, posts JSON to 
 docs/agent-flow.png                    how the agent works
 docs/cover.jpg                         portfolio cover
 docs/cover-wide.jpg                    1200x627 wide cover (LinkedIn, social preview)
-docs/screenshots/                      Telegram, Pipedrive, form, n8n, test results
+docs/screenshots/                      Telegram, email thread, Pipedrive, form, n8n, test results
 ```
 
 ## Run it yourself
