@@ -59,11 +59,11 @@ Every branch was exercised by hand: HIGH with a sent reply; MEDIUM with the full
 
 Prices used: Haiku $0.10 / $0.50 and Sonnet $2 / $10 per million input / output tokens, calculated from logged tokens.
 
-**What the live run found (8 issues, all fixed).** A request parameter Sonnet does not accept (the draft failed, the lead still reached the CRM and an alert explained why); a fix sitting in an unpublished workflow version; a stale error re-alerted on a redraft; the follow-up email repeating the first one instead of acknowledging the lead's answer; Gmail's localized quote header leaking into the reply text; an overlap between two services in the catalog; a missing *Later* button; and a testing pitfall — test leads sent from the agent's own mailbox are invisible to the reply trigger (fixed by using `+tag` addresses of a separate mailbox).
+**What the live run found (9 issues, all fixed).** A request parameter Sonnet does not accept (the draft failed, the lead still reached the CRM and an alert explained why); a fix sitting in an unpublished workflow version; a stale error re-alerted on a redraft; the follow-up email repeating the first one instead of acknowledging the lead's answer; Gmail's localized quote header leaking into the reply text; an overlap between two services in the catalog; a missing *Later* button; the follow-up after a lead's answer sent as a new email instead of a reply in the same thread; and a testing pitfall — test leads sent from the agent's own mailbox are invisible to the reply trigger (fixed by using `+tag` addresses of a separate mailbox).
 
 ## Screenshots
 
-**Manager's card in Telegram**: tier, reason, the draft and the call brief:
+**Manager's card in Telegram** after the lead answered our questions: tier, reason, name and phone picked up from the reply, the follow-up and the call brief:
 
 ![HIGH card](docs/screenshots/01-telegram-high-card.jpg)
 
@@ -75,14 +75,9 @@ MEDIUM: questions only about what is missing:
 
 ![MEDIUM card](docs/screenshots/03-telegram-medium-card.jpg)
 
-**Dialogue by email**: questions → the lead's answer → the follow-up that moves to a call:
-
-![Email thread](docs/screenshots/04-email-thread.jpg)
-
 **Pipedrive**: every lead on the stage that matches its tier, with the agent's note:
 
 ![Pipedrive board](docs/screenshots/05-pipedrive-board.jpg)
-![Pipedrive deal](docs/screenshots/06-pipedrive-deal.jpg)
 
 **Test results** (27 leads × 3 runs):
 
