@@ -81,6 +81,10 @@ ATTENTION: budget below the service minimum or deadline too short, no draft, the
 
 ![ATTENTION card](docs/screenshots/02-telegram-attention-card.jpg)
 
+**Daily digest** at 09:00: volume by tier, AI cost for the day, leads waiting for an answer, low-fit leads to double-check, error count:
+
+![Daily digest](docs/screenshots/06-telegram-daily-digest.jpg)
+
 **Pipedrive**: every lead on the stage that matches its tier, with the agent's note:
 
 ![Pipedrive board](docs/screenshots/05-pipedrive-board.jpg)
