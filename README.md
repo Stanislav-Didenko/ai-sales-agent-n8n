@@ -1,5 +1,7 @@
 # Veloxa AI — Sales Agent for Inbound Leads (n8n + Claude + Pipedrive)
 
+![AI Sales Agent for Inbound Leads](docs/cover.jpg)
+
 A lead-qualification agent for a small AI-automation agency. It reads every request from the website form, works out what the client needs, checks budget and deadline against the agency's service catalog, creates the deal in Pipedrive, drafts the reply (or the clarifying questions) and a call brief, and puts everything in front of the sales manager in Telegram. When a lead answers the questions by email, the agent picks up the reply, re-scores the lead and drafts the next email. A human sends every message.
 
 > Concept project. Veloxa AI is a fictional agency; all leads are synthetic test data. The demo takes leads from a web form; the same logic works with a Gmail inbox or a CRM web form as the input.
@@ -104,7 +106,8 @@ tests/results_runs.csv                 exploratory run + 3 counted runs (108 res
 form/index.html                        the web form (single file, posts JSON to the n8n webhook)
 docs/agent-flow.png                    how the agent works
 docs/cover.jpg                         portfolio cover
-docs/screenshots/                      Telegram, email, Pipedrive, form, n8n
+docs/cover-social.jpg                  1280x640 social preview
+docs/screenshots/                      Telegram, Pipedrive, form, n8n, test results
 ```
 
 ## Run it yourself
