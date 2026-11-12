@@ -103,6 +103,7 @@ tests/test_cases.csv                   27 test requests with expected tier, serv
 tests/results_runs.csv                 exploratory run + 3 counted runs (108 results, tokens, cost, time)
 form/index.html                        the web form (single file, posts JSON to the n8n webhook)
 docs/agent-flow.png                    how the agent works
+docs/cover.jpg                         portfolio cover
 docs/screenshots/                      Telegram, email, Pipedrive, form, n8n
 ```
 
