@@ -106,7 +106,7 @@ tests/results_runs.csv                 exploratory run + 3 counted runs (108 res
 form/index.html                        the web form (single file, posts JSON to the n8n webhook)
 docs/agent-flow.png                    how the agent works
 docs/cover.jpg                         portfolio cover
-docs/cover-social.jpg                  1280x640 social preview
+docs/cover-wide.jpg                    1200x627 wide cover (LinkedIn, social preview)
 docs/screenshots/                      Telegram, Pipedrive, form, n8n, test results
 ```
 
