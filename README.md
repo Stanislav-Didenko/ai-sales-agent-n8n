@@ -77,6 +77,11 @@ Prices used: Haiku $0.10 / $0.50 and Sonnet $2 / $10 per million input / output 
 
 **What the enrichment tests found (3 issues, all fixed).** The URL parser used `new URL()`, which is not available in the n8n Code sandbox, so every address was rejected as invalid; the "continue on error" setting of the new HTTP nodes was silently not saved, so a dead site crashed the run (the lead was in Pipedrive but got no card); the summary model commented on what the site does *not* say ("the text does not state a country"). Lesson: re-read the saved workflow after every change, not just the API reply.
 
+### Next steps for production
+
+- **Measure before hardening the scraper.** Every lead row stores `site_status`. After a couple of weeks of real traffic, count how many sites end in `blocked`, `no response` or `rendered: failed`. If the share is noticeable, switch the Browserless call from `/content` to `/smart-scrape` (automatic fallbacks for bot-protected sites; slower and uses more Browserless units). Same HTTP Request node, only the endpoint and response parsing change.
+- **Writes to the lead sheet retry** (3 tries, 2 s apart): the lead row is the agent's memory, the reply matching depends on it, and Google Sheets rate limits do happen.
+
 ## Screenshots
 
 **Manager's cards in Telegram.** One lead, two steps. First MEDIUM: budget and deadline are missing, so the agent asks only about them:

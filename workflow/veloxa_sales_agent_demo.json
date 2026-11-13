@@ -1663,6 +1663,9 @@
     240
    ],
    "onError": "continueRegularOutput",
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
    "credentials": {
     "googleSheetsOAuth2Api": {
      "id": "YOUR_CREDENTIAL_ID",
@@ -2386,6 +2389,9 @@
     1072
    ],
    "onError": "continueRegularOutput",
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
    "credentials": {
     "googleSheetsOAuth2Api": {
      "id": "YOUR_CREDENTIAL_ID",
@@ -3555,8 +3561,8 @@
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
-    6704,
-    -336
+    6800,
+    -528
    ]
   },
   {
@@ -3586,8 +3592,8 @@
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
    "position": [
-    6944,
-    -336
+    7040,
+    -528
    ]
   },
   {
@@ -3621,11 +3627,11 @@
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.3,
    "position": [
-    7184,
-    -448
+    7280,
+    -640
    ],
-   "notes": "Free plain GET. Never Error + 8 s timeout + continue on error: a dead site never stops the lead.",
-   "onError": "continueRegularOutput"
+   "onError": "continueRegularOutput",
+   "notes": "Free plain GET. Never Error + 8 s timeout + continue on error: a dead site never stops the lead."
   },
   {
    "parameters": {
@@ -3636,8 +3642,8 @@
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
-    7424,
-    -448
+    7520,
+    -640
    ]
   },
   {
@@ -3667,8 +3673,8 @@
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
    "position": [
-    7664,
-    -448
+    7760,
+    -640
    ]
   },
   {
@@ -3694,11 +3700,11 @@
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.3,
    "position": [
-    7904,
-    -624
+    8000,
+    -816
    ],
-   "notes": "Headless browser (runs JavaScript). Only for sites where the plain GET returned almost no text. Credential: Query Auth, name = token.",
    "onError": "continueRegularOutput",
+   "notes": "Headless browser (runs JavaScript). Only for sites where the plain GET returned almost no text. Credential: Query Auth, name = token.",
    "credentials": {
     "httpQueryAuth": {
      "id": "YOUR_CREDENTIAL_ID",
@@ -3715,8 +3721,8 @@
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
-    8144,
-    -624
+    8240,
+    -816
    ]
   },
   {
@@ -3746,8 +3752,8 @@
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.2,
    "position": [
-    8384,
-    -336
+    8480,
+    -528
    ]
   },
   {
@@ -3780,8 +3786,8 @@
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.3,
    "position": [
-    8624,
-    -448
+    8720,
+    -640
    ],
    "onError": "continueRegularOutput",
    "credentials": {
@@ -3800,8 +3806,8 @@
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
-    8864,
-    -336
+    8960,
+    -528
    ]
   }
  ],
