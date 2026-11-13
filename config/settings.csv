@@ -39,3 +39,8 @@ pd_field_call_consent,(written by Setup Pipedrive),"Deal field ""Call consent"" 
 pd_field_ai_confidence,(written by Setup Pipedrive),"Deal field ""AI confidence"" (set by Setup Pipedrive)"
 pd_field_missing_info,(written by Setup Pipedrive),"Deal field ""Missing info"" (set by Setup Pipedrive)"
 pd_field_deadline_as_written,(written by Setup Pipedrive),"Deal field ""Deadline (as written)"" (set by Setup Pipedrive)"
+enrich_enabled,yes,Company website enrichment for HIGH / MEDIUM leads. no = off
+enrich_browserless,yes,Use Browserless when the plain GET returns almost no text (JS site or bot block)
+enrich_min_chars,300,"Less page text than this = JS site / blocked, try Browserless"
+enrich_max_chars,3500,Website text sent to the summary model is cut to this length
+enrich_force_render,no,Test switch: yes = every reachable site goes through Browserless. Keep no
