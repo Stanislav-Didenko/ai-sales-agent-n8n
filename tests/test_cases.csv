@@ -14,7 +14,7 @@ c12,Harborview Hotels,Leads from our website and email come in as quote requests
 c13,Maple Clinics,Leads from our website and email come in as quote requests and someone types each one into HubSpot by hand. We want them captured and routed to the right salesperson automatically.,"$4,000",till this December,HIGH,lead_automation,4000,(date),this + future month
 c14,Cedar Realty,Leads from our website and email come in as quote requests and someone types each one into HubSpot by hand. We want them captured and routed to the right salesperson automatically.,"$4,000",by August,HIGH,lead_automation,4000,(date),month next year
 c15,Lumen Fitness,Leads from our website and email come in as quote requests and someone types each one into HubSpot by hand. We want them captured and routed to the right salesperson automatically.,"$4,000",in a few weeks,MEDIUM,lead_automation,4000,,vague
-c16,Pixel & Pine Studio,We need a new logo and a full redesign of our company website.,"$2,000",2 months,LOW,out_of_scope,,,out of scope
+c16,Pixel & Pine Studio,We need a new logo and a full redesign of our company website.,"$2,000",2 months,LOW,out_of_scope,2000,8.7,out of scope
 c17,SEO Boosters,We offer guaranteed first-page Google rankings and 500 backlinks for $99/month. Reply to get started!,,,STOPPED,,,,spam
 c18,Bluebird Co,We want to use AI in our business. Can you help us?,,,ATTENTION,unclear,,,too vague
 c19,Helix Software,We want a chatbot on our website that answers customer questions from our help docs and product manuals.,"$5,000",6 weeks,HIGH,ai_assistant,5000,6,RAG

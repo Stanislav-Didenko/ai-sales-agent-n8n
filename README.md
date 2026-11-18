@@ -19,7 +19,8 @@ A lead-qualification agent for a small AI-automation agency. It reads every requ
 7. **Human gate** (Telegram): a card per lead with the reason for the tier and the draft. Buttons: *Send · Edit · Later · Not a lead*; on ATTENTION cards: *Treat as High · Ask questions · Low · Not a lead · Later*. *Edit* = reply to the bot in plain words, Claude rewrites the draft.
 8. **Dialogue** (Gmail): replies in the same thread are matched to the lead, re-extracted and re-scored; the follow-up email thanks for the details without repeating them and moves to the call. Name and phone given in the reply or its signature are written to the lead and to Pipedrive.
 9. **Voice-AI handoff (prepared, not connected)**: for leads who left a phone number and ticked "OK to call", the manager can queue a JSON payload for a voice agent (identity disclosure, goal, questions, rules). It is saved to the deal; no call is placed. Automated calling is a separate system with its own consent rules (TCPA in the US, GDPR / AI Act in the EU).
-10. **Operations**: daily digest at 09:00 (postponed cards, leads waiting for an answer, low-fit leads), timeout cards with *Nudge / Close* after 3 business days without a reply, token and cost log per call, error log. **An error in any node does not stop the lead**: it is processed further and a Telegram alert names the failed step.
+10. **Operations**: daily digest at 09:00 (postponed cards, leads waiting for an answer, low-fit leads), timeout cards with *Nudge / Close* after 3 business days without a reply, token and cost log per call, error log. **An error in any node does not stop the lead**: it is processed further and a Telegram alert names the failed step (no personal data in alerts).
+11. **Right to erasure**: `/forget client@email.com` in the manager chat, confirmed with a button, anonymises the lead rows, deletes the Pipedrive deal and person and wipes the Telegram cards.
 
 ## Design decisions
 
@@ -77,10 +78,34 @@ Prices used: Haiku $0.10 / $0.50 and Sonnet $2 / $10 per million input / output 
 
 **What the enrichment tests found (3 issues, all fixed).** The URL parser used `new URL()`, which is not available in the n8n Code sandbox, so every address was rejected as invalid; the "continue on error" setting of the new HTTP nodes was silently not saved, so a dead site crashed the run (the lead was in Pipedrive but got no card); the summary model commented on what the site does *not* say ("the text does not state a country"). Lesson: re-read the saved workflow after every change, not just the API reply.
 
+### n8n Evaluations: 27 cases through the production agent (16.11)
+
+A separate workflow (`workflow/veloxa_evaluations.json`) runs the same 27-case dataset through n8n's built-in **Evaluations**: each case is posted to the production webhook in test mode, the real agent writes its result, and the evaluation compares tier, service, budget and deadline field by field. The result is kept per run, so any prompt or model change can be compared with the baseline.
+
+| Metric | Result |
+|---|---|
+| Cases fully correct | **25/27** |
+| c16 | the expected value in the dataset was wrong (the agent was right); dataset fixed |
+| c14 "by August" | real model nondeterminism: the same text passed 3 times on 11.11 and was marked "ambiguous" on 16.11, so the lead got questions instead of HIGH |
+
+**The fix is again in code, not in the prompt.** Month-only deadlines are now resolved by code from the verified quote (or the deadline field): a month that has passed rolls over to next year; "this August" said in November stays ambiguous. The model's own "ambiguous" flag is no longer trusted for this case. Lesson: a deterministic layer is cheaper than a better prompt when the input space is small and known.
+
+## Production readiness
+
+The agent was checked against a 27-point go-live checklist (reliability, observability, cost, security, documentation). Full status, launch instructions and runbook: [`docs/agent-documentation.md`](docs/agent-documentation.md).
+
+- **Retries only where repeating is safe.** Reads, model calls and updates by ID retry; creating records in Pipedrive and sending email do not. A retry after a timeout that actually succeeded would create a duplicate deal or a second email.
+- **No personal data in logs.** Cost log, error log and alerts carry the lead ID only. Successful executions are not stored in n8n (they contained the full request); failed ones are, so an alert can be traced.
+- **Least privilege.** The models have no tools. Sending, CRM stage changes and call payloads are manager clicks, accepted only from the allowed chat. The model never writes the manager's decision field.
+- **Prompt injection.** All three prompts treat input and website text as data; a regex filter runs before the model; two disguised injections are in the test set. A suspected injection goes to a human, not to auto-reject, so an odd but real client is not lost.
+- **Right to erasure.** `/forget` with confirmation (see "What it does", step 11). Gmail correspondence is kept as a business record.
+- **Accepted risks** (concept project): no spend limit at the model provider yet, a cheaper draft model not evaluated, broad Google and Pipedrive credential scopes, no consent checkbox or data retention period on the form.
+
 ### Next steps for production
 
 - **Measure before hardening the scraper.** Every lead row stores `site_status`. After a couple of weeks of real traffic, count how many sites end in `blocked`, `no response` or `rendered: failed`. If the share is noticeable, switch the Browserless call from `/content` to `/smart-scrape` (automatic fallbacks for bot-protected sites; slower and uses more Browserless units). Same HTTP Request node, only the endpoint and response parsing change.
-- **Writes to the lead sheet retry** (3 tries, 2 s apart): the lead row is the agent's memory, the reply matching depends on it, and Google Sheets rate limits do happen.
+- **Writes to the lead sheet retry** (3 tries, 2 s apart): the lead row is the agent's memory, the reply matching depends on it, and Google Sheets rate limits do happen. These writes are updates by lead ID, so a repeat is safe.
+- **Close the accepted risks before a real client:** a monthly spend limit at Anthropic, a consent checkbox and privacy-policy link on the form, a retention job that anonymises old non-client leads, credentials scoped to a dedicated Google account and a restricted Pipedrive user, and an evaluation of Haiku for drafts.
 
 ## Screenshots
 
@@ -123,7 +148,8 @@ ATTENTION: budget below the service minimum or deadline too short, no draft, the
 ## Repository
 
 ```
-workflow/veloxa_sales_agent_demo.json   n8n workflow export (127 nodes, credentials and IDs removed)
+workflow/veloxa_sales_agent_demo.json   n8n workflow export (137 nodes, credentials and IDs removed)
+workflow/veloxa_evaluations.json       n8n Evaluations run against the production agent (27 cases)
 prompts/system_prompts.md              the three prompts: fact extraction (Haiku), draft and call brief (Sonnet), website summary (Haiku)
 config/services.csv                    service catalog with minimum budget and weeks
 config/out_of_scope.csv                categories the agency does not do
@@ -131,6 +157,7 @@ config/settings.csv                    all settings (models, prices, limits, tex
 tests/test_cases.csv                   27 test requests with expected tier, service, budget, deadline
 tests/results_runs.csv                 exploratory run + 3 counted runs (108 results, tokens, cost, time)
 form/index.html                        the web form (single file, posts JSON to the n8n webhook)
+docs/agent-documentation.md            services, credentials (names only), launch, runbook, go-live checklist status
 docs/agent-flow.png                    how the agent works
 docs/cover.jpg                         portfolio cover
 docs/cover-wide.jpg                    1200x627 wide cover (LinkedIn, social preview)
@@ -140,10 +167,11 @@ docs/screenshots/                      Telegram, email thread, Pipedrive, form, 
 ## Run it yourself
 
 1. Import `workflow/veloxa_sales_agent_demo.json` into n8n (Cloud or self-hosted).
-2. Create a Google Sheet with the tabs *settings, services, out_of_scope, leads, log, errors, Tests* (fill the first three from `config/`) and replace `YOUR_GOOGLE_SHEET_ID`.
+2. Create a Google Sheet with the tabs *settings, services, out_of_scope, leads, log, errors, Tests, eval* (fill the first three from `config/`) and replace `YOUR_GOOGLE_SHEET_ID`.
 3. Add credentials: Anthropic API, Google Sheets OAuth2, Gmail OAuth2, Telegram bot, Pipedrive API, Browserless (Query Auth, name `token`; free plan is enough). Put your Telegram user id and Pipedrive subdomain into *settings*.
 4. Run the *Setup Pipedrive (run once)* trigger: it creates the pipeline, stages and deal fields and writes their ids into *settings*.
 5. Publish the workflow, set `WEBHOOK_URL` in `form/index.html` and send a request.
+6. Optional: fill the *eval* tab from `tests/test_cases.csv` (columns `case_id, company, request, budget, deadline, expected_tier, expected_service, expected_budget_usd, expected_deadline`), import `workflow/veloxa_evaluations.json`, set your webhook URL in it and run it from the Evaluations tab.
 
 ## Stack
 

@@ -1,0 +1,350 @@
+{
+  "name": "Veloxa AI — Evaluations (sales agent)",
+  "connections": {
+    "Evaluation Trigger": {
+      "main": [
+        [
+          {
+            "node": "Build test request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build test request": {
+      "main": [
+        [
+          {
+            "node": "Send to the real agent (test mode)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send to the real agent (test mode)": {
+      "main": [
+        [
+          {
+            "node": "Wait for the agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for the agent": {
+      "main": [
+        [
+          {
+            "node": "Read agent result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read agent result": {
+      "main": [
+        [
+          {
+            "node": "Compare with expected",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compare with expected": {
+      "main": [
+        [
+          {
+            "node": "Set Metrics",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Metrics": {
+      "main": [
+        [
+          {
+            "node": "Set Outputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "parameters": {
+        "source": "googleSheets",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "YOUR_GOOGLE_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "eval"
+        }
+      },
+      "name": "Evaluation Trigger",
+      "type": "n8n-nodes-base.evaluationTrigger",
+      "typeVersion": 4.7,
+      "position": [
+        0,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "YOUR_GOOGLESHEETSOAUTH2API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// One dataset row -> the same request the web form sends, marked as a test run (no CRM, no Telegram, no drafts).\nconst r = $json;\nconst run = 'EVAL-' + $execution.id;\nreturn { json: { run: run, body: { name: '', email: 'test+' + r.case_id + '@example.com', company: String(r.company || ''), request: String(r.request || ''), budget: String(r.budget == null ? '' : r.budget), deadline: String(r.deadline == null ? '' : r.deadline), website: '', phone: '', hp_field: '', test_run: run, test_case: r.case_id } } };\n"
+      },
+      "name": "Build test request",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://YOUR_N8N_HOST/webhook/veloxa-lead",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.body) }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "name": "Send to the real agent (test mode)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        448,
+        0
+      ],
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 3000,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "amount": 12
+      },
+      "name": "Wait for the agent",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        672,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "YOUR_GOOGLE_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "Tests"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "test_run",
+              "lookupValue": "={{ $('Build test request').item.json.run }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Read agent result",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        896,
+        0
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 3000,
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "YOUR_GOOGLESHEETSOAUTH2API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Compare the agent's real result (Tests sheet, written by the production workflow in test mode) with the expected values from the eval dataset.\nfunction S(v) { return String(v == null ? '' : v).trim(); }\nfunction num(v) { const s = S(v).replace(/\\s/g, '').replace(',', '.'); if (s === '') return null; const n = Number(s); return isNaN(n) ? null : n; }\nconst exp = $('Evaluation Trigger').item.json;\nconst got = $json || {};\nconst found = !!S(got.lead_id || got.tier);\nconst issues = [];\n// expected deadline: a number of weeks, or a date (deadlines like \"by Christmas\" depend on today)\nfunction expWeeks(v) {\n  if (S(v) === '') return null;\n  if (/^\\d{4}-\\d{2}-\\d{2}$/.test(S(v))) { const d = Date.parse(S(v) + 'T00:00:00Z'); const t = new Date(); const today = Date.UTC(t.getUTCFullYear(), t.getUTCMonth(), t.getUTCDate()); return Math.round((d - today) / 864e5 / 7 * 10) / 10; }\n  const n = num(v);\n  if (n != null && n > 30000) { const d = Date.UTC(1899, 11, 30) + n * 864e5; const t = new Date(); const today = Date.UTC(t.getUTCFullYear(), t.getUTCMonth(), t.getUTCDate()); return Math.round((d - today) / 864e5 / 7 * 10) / 10; } // Sheets date serial\n  return n;\n}\nconst eTier = S(exp.expected_tier), gTier = S(got.tier);\nconst injectionCaught = /possible_injection/.test(S(got.flags)) && gTier === 'ATTENTION';\nlet tier_ok, service_ok, budget_ok, deadline_ok;\nif (!found) { tier_ok = service_ok = budget_ok = deadline_ok = 0; issues.push('no result row from the agent'); }\nelse if (injectionCaught) { tier_ok = service_ok = budget_ok = deadline_ok = 1; issues.push('injection caught by the code filter (no model call)'); }\nelse {\n  tier_ok = (eTier === 'NOT_HIGH' ? gTier !== 'HIGH' : gTier === eTier) ? 1 : 0;\n  if (!tier_ok) issues.push('tier ' + gTier + ' ≠ ' + eTier);\n  service_ok = (!S(exp.expected_service) || S(got.service_id) === S(exp.expected_service)) ? 1 : 0;\n  if (!service_ok) issues.push('service ' + S(got.service_id) + ' ≠ ' + S(exp.expected_service));\n  const eb = num(exp.expected_budget_usd), gb = num(got.budget_usd_max);\n  budget_ok = (eb == null ? gb == null : (gb != null && Math.abs(gb - eb) <= 1)) ? 1 : 0;\n  if (!budget_ok) issues.push('budget ' + (gb == null ? '—' : gb) + ' ≠ ' + (eb == null ? '—' : eb));\n  const ew = expWeeks(exp.expected_deadline), gw = num(got.deadline_weeks);\n  deadline_ok = (ew == null ? gw == null : (gw != null && Math.abs(gw - ew) <= 0.6)) ? 1 : 0;\n  if (!deadline_ok) issues.push('deadline ' + (gw == null ? '—' : gw) + ' wks ≠ ' + (ew == null ? '—' : ew));\n}\nconst all_ok = (tier_ok && service_ok && budget_ok && deadline_ok) ? 1 : 0;\nreturn { json: { got_tier: gTier, got_service: S(got.service_id), got_budget_usd: S(got.budget_usd_max), got_deadline_weeks: S(got.deadline_weeks), tier_ok, service_ok, budget_ok, deadline_ok, all_ok, issues: issues.join('; ') } };\n"
+      },
+      "name": "Compare with expected",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "setMetrics",
+        "metric": "customMetrics",
+        "metrics": {
+          "assignments": [
+            {
+              "id": "all_ok",
+              "name": "all_ok",
+              "value": "={{ $json.all_ok }}",
+              "type": "number"
+            },
+            {
+              "id": "tier_ok",
+              "name": "tier_ok",
+              "value": "={{ $json.tier_ok }}",
+              "type": "number"
+            },
+            {
+              "id": "service_ok",
+              "name": "service_ok",
+              "value": "={{ $json.service_ok }}",
+              "type": "number"
+            },
+            {
+              "id": "budget_ok",
+              "name": "budget_ok",
+              "value": "={{ $json.budget_ok }}",
+              "type": "number"
+            },
+            {
+              "id": "deadline_ok",
+              "name": "deadline_ok",
+              "value": "={{ $json.deadline_ok }}",
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "name": "Set Metrics",
+      "type": "n8n-nodes-base.evaluation",
+      "typeVersion": 4.8,
+      "position": [
+        1344,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "source": "googleSheets",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "YOUR_GOOGLE_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "eval"
+        },
+        "outputs": {
+          "values": [
+            {
+              "outputName": "got_tier",
+              "outputValue": "={{ $('Compare with expected').item.json.got_tier }}"
+            },
+            {
+              "outputName": "got_service",
+              "outputValue": "={{ $('Compare with expected').item.json.got_service }}"
+            },
+            {
+              "outputName": "got_budget_usd",
+              "outputValue": "={{ $('Compare with expected').item.json.got_budget_usd }}"
+            },
+            {
+              "outputName": "got_deadline_weeks",
+              "outputValue": "={{ $('Compare with expected').item.json.got_deadline_weeks }}"
+            },
+            {
+              "outputName": "tier_ok",
+              "outputValue": "={{ $('Compare with expected').item.json.tier_ok }}"
+            },
+            {
+              "outputName": "service_ok",
+              "outputValue": "={{ $('Compare with expected').item.json.service_ok }}"
+            },
+            {
+              "outputName": "budget_ok",
+              "outputValue": "={{ $('Compare with expected').item.json.budget_ok }}"
+            },
+            {
+              "outputName": "deadline_ok",
+              "outputValue": "={{ $('Compare with expected').item.json.deadline_ok }}"
+            },
+            {
+              "outputName": "all_ok",
+              "outputValue": "={{ $('Compare with expected').item.json.all_ok }}"
+            },
+            {
+              "outputName": "issues",
+              "outputValue": "={{ $('Compare with expected').item.json.issues }}"
+            }
+          ]
+        }
+      },
+      "name": "Set Outputs",
+      "type": "n8n-nodes-base.evaluation",
+      "typeVersion": 4.8,
+      "position": [
+        1568,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "YOUR_GOOGLESHEETSOAUTH2API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Eval of the REAL Sales agent\nNo copy of the agent here. Each dataset row (sheet **eval**, 27 cases with expected values) is sent to the production webhook with test_run: the full pipeline runs (code checks, Haiku extraction, quote check, scoring in code), side effects are off (no Pipedrive, Telegram, drafts). The agent writes its result to the **Tests** sheet; this workflow reads it back and compares field by field.\n\nRun: Evaluations tab → Run test. One row ≈ 15 s.",
+        "height": 320,
+        "width": 464,
+        "color": 4
+      },
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -64,
+        -240
+      ]
+    }
+  ],
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
